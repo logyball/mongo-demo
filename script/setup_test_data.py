@@ -44,30 +44,32 @@ def initialize_sharded_db():
         'shardCollection': collection_to_shard,
         'key': {'port': 1}
     }))
-    pprint(admin_db.command('addShardToZone', shard=SHARD_1, zone='low'))
-    pprint(admin_db.command('addShardToZone', shard=SHARD_2, zone='mid'))
-    pprint(admin_db.command('addShardToZone', shard=SHARD_3, zone='high'))
+    pprint(admin_db.command('addShardToZone', 'tic', zone='low'))
+    pprint(admin_db.command('addShardToZone', 'tac', zone='mid'))
+    pprint(admin_db.command('addShardToZone', 'toe', zone='high'))
     pprint(admin_db.command(
         'updateZoneKeyRange',
-        updateZoneKeyRange=COLLECTION,
-        min=1000,
-        max=1999,
+        updateZoneKeyRange=collection_to_shard,
+        min={'port': 1000},
+        max={'port': 1999},
         zone='low'
     ))
     pprint(admin_db.command(
         'updateZoneKeyRange',
-        updateZoneKeyRange=COLLECTION,
-        min=2000,
-        max=2999,
+        updateZoneKeyRange=collection_to_shard,
+        min={'port': 2000},
+        max={'port': 2999},
         zone='mid'
     ))
     pprint(admin_db.command(
         'updateZoneKeyRange',
-        updateZoneKeyRange=COLLECTION,
-        min=3000,
-        max=4000,
+        updateZoneKeyRange=collection_to_shard,
+        min={'port': 3000},
+        max={'port': 4000},
         zone='high'
     ))
+    service_records = get_list_service_records()
+    pprint(collection.insert_many(service_records))
 
 
 def initialize_non_sharded_db():
