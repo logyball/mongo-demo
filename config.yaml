@@ -1,0 +1,6 @@
+start_repl_port: 30000
+non_shard_port: 27018
+repl_name: 'demo_rs'
+shard_1: 'tic'
+shard_2: 'tac'
+shard_3: 'toe'

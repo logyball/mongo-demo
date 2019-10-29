@@ -1,5 +1,4 @@
 import pymongo as mongo
-from os import system
 from sys import argv
 from pprint import pprint
 
@@ -39,37 +38,37 @@ def initialize_sharded_db():
     client, db, collection = get_client_init_db(sharded=True)
     collection_to_shard = DB + "." + COLLECTION
     admin_db = client.admin
-    pprint(admin_db.command('enableSharding', DB))
-    pprint(admin_db.command({
+    admin_db.command('enableSharding', DB)
+    admin_db.command({
         'shardCollection': collection_to_shard,
         'key': {'port': 1}
-    }))
-    pprint(admin_db.command('addShardToZone', 'tic', zone='low'))
-    pprint(admin_db.command('addShardToZone', 'tac', zone='mid'))
-    pprint(admin_db.command('addShardToZone', 'toe', zone='high'))
-    pprint(admin_db.command(
+    })
+    admin_db.command('addShardToZone', 'tic', zone='low')
+    admin_db.command('addShardToZone', 'tac', zone='mid')
+    admin_db.command('addShardToZone', 'toe', zone='high')
+    admin_db.command(
         'updateZoneKeyRange',
         updateZoneKeyRange=collection_to_shard,
         min={'port': 1000},
         max={'port': 1999},
         zone='low'
-    ))
-    pprint(admin_db.command(
+    )
+    admin_db.command(
         'updateZoneKeyRange',
         updateZoneKeyRange=collection_to_shard,
         min={'port': 2000},
         max={'port': 2999},
         zone='mid'
-    ))
-    pprint(admin_db.command(
+    )
+    admin_db.command(
         'updateZoneKeyRange',
         updateZoneKeyRange=collection_to_shard,
         min={'port': 3000},
         max={'port': 4000},
         zone='high'
-    ))
+    )
     service_records = get_list_service_records()
-    pprint(collection.insert_many(service_records))
+    collection.insert_many(service_records)
 
 
 def initialize_non_sharded_db():
