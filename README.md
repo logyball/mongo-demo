@@ -22,7 +22,8 @@ Run the initial setup script (from the root project directory):
 
 Run the data population script:
 ```bash
-(venv) $ python scripts/setup_test_data.py
+(venv) $ python scripts/setup_test_data.py single
+(venv) $ python scripts/setup_test_data.py shard
 ```
 
 View your data in [Mongo Compass](https://www.mongodb.com/products/compass).
