@@ -1,6 +1,8 @@
-how to initialize!
+how to initialize:
 
 Make sure that you have the [mtools tool installed](https://github.com/rueckstiess/mtools).
+Edit the `config.yaml` file as necessary
+
 
 Create a python virtualenv with python3:
 ```bash
@@ -17,3 +19,10 @@ Run the initial setup script (from the root project directory):
 ```bash
 (venv) $ python scripts/setup_mongos.py
 ```
+
+Run the data population script:
+```bash
+(venv) $ python scripts/setup_test_data.py
+```
+
+View your data in [Mongo Compass](https://www.mongodb.com/products/compass).
