@@ -1,6 +1,5 @@
 how to initialize:
 
-Make sure that you have the [mtools tool installed](https://github.com/rueckstiess/mtools).
 Edit the `config.yaml` file as necessary
 
 
