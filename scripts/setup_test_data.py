@@ -1,6 +1,5 @@
 import pymongo as mongo
 from sys import argv
-from pprint import pprint
 
 MONGO_HOST = 'localhost'
 SHARD_PORT = 30000
